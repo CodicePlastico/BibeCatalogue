@@ -1,0 +1,153 @@
+/* Custom styles for BibeCatalogue */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.page {
+    min-height: calc(100vh - 100px);
+}
+
+/* Card styles */
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* Login form styles */
+.login-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.login-card {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+/* Course card styles */
+.course-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.course-card:hover {
+    transform: translateY(-2px);
+}
+
+.result-badge {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* Search box styles */
+.search-container {
+    position: relative;
+}
+
+.search-container .form-control {
+    padding-right: 2.5rem;
+}
+
+.search-container .btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Progress bar styles */
+.progress {
+    border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+/* Footer styles */
+.footer {
+    margin-top: auto;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Loading spinner */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+/* Empty state styles */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+/* Validation styles */
+.validation-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-control.is-valid {
+    border-color: #28a745;
+}
+
+/* Animation classes */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
