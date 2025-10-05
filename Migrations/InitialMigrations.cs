@@ -61,6 +61,22 @@ public class SeedInitialData : Migration
             LastName = "User"
         });
 
+        // Inserimento studenti
+        Insert.IntoTable("Users").Row(new
+        {
+            Email = "d.adorni@studenti.unibs.it",
+            Password = "d4v1d3",
+            FirstName = "Davide",
+            LastName = "Adorni"
+        });
+        Insert.IntoTable("Users").Row(new
+        {
+            Email = "d.bisoli@studenti.unibs.it",
+            Password = "d1m1tr1", // In produzione usare hash sicuro
+            FirstName = "Dimitri",
+            LastName = "Bisoli"
+        });
+
         // Inserimento corsi di esempio
         Execute.Sql(@"
             DECLARE @UserId INT = (SELECT Id FROM Users WHERE Email = 'test@example.com');
@@ -70,6 +86,20 @@ public class SeedInitialData : Migration
             ('Corso di Database Design', '2024-02-01', '2024-04-01', 25, @UserId),
             ('Corso di Web Development', '2024-03-01', '2024-05-01', 30, @UserId),
             ('Corso di Azure Fundamentals', '2024-04-01', '2024-06-01', 27, @UserId);
+        ");
+
+        // Inserimento corsi
+        Execute.Sql(@"
+            DECLARE @UserId INT = (SELECT Id FROM Users WHERE Email = 'd.adorni@studenti.unibs.it');
+            
+            INSERT INTO Courses (Title, StartDate, EndDate, Result, UserId) VALUES 
+            ('Basi di dati e linguaggi di programmazione', '2025-09-16', '2025-12-16', 24, @UserId);
+        ");
+        Execute.Sql(@"
+            DECLARE @UserId INT = (SELECT Id FROM Users WHERE Email = 'd.bisoli@studenti.unibs.it');
+            
+            INSERT INTO Courses (Title, StartDate, EndDate, Result, UserId) VALUES 
+            ('Basi di dati e linguaggi di programmazione', '2025-09-16', '2025-12-16', 28, @UserId);
         ");
     }
 
