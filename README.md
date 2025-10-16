@@ -1,4 +1,4 @@
-# BibeCatalogue - Sistema di Gestione Corsi per demo SQL Injection
+# BibeCatalogue - Sistema di Gestione Corsi
 
 Un'applicazione web ASP.NET Core per la gestione dei corsi di formazione con autenticazione utente e database MSSQL.
 
