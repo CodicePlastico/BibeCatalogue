@@ -461,3 +461,6 @@ coverage/
 ## Temporary folders
 tmp/
 temp/
+
+## Windows files
+desktop.ini
