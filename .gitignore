@@ -412,8 +412,8 @@ mono_crash.*
 
 ## Docker
 .dockerignore
-Dockerfile*
-docker-compose*
+#Dockerfile*
+#docker-compose*
 .docker
 
 ## Environment variables

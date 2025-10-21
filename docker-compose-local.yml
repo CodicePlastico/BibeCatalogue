@@ -1,0 +1,36 @@
+# Docker Compose per BibeCatalogue
+
+services:
+  # Applicazione Web Blazor
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bibecatalogue-web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=BibeCatalogueDB;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true;
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_keys:/app/keys
+    networks:
+      - bibecatalogue-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  sqlserver_data:
+    driver: local
+  app_keys:
+    driver: local
+
+networks:
+  bibecatalogue-network:
+    driver: bridge
