@@ -102,3 +102,20 @@ GO
 DELETE FROM dbo.Courses
 WHERE UserId = 3;
 GO
+
+CREATE TABLE [dbo].[VersionInfo](
+	[VersionNumber] [nvarchar](10) NOT NULL,
+	[DateCreated] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[VersionNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[VersionInfo] ADD  DEFAULT (getdate()) FOR [DateCreated]
+GO
+
+INSERT INTO dbo.VersionInfo VALUES ('0.99', '20251001');
+INSERT INTO dbo.VersionInfo VALUES ('1.01', '20251021');
+GO
