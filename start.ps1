@@ -3,8 +3,8 @@
 # Descrizione: Script per avviare facilmente l'applicazione BibeCatalogue
 
 param(
-    [Parameter(HelpMessage="Modalità di avvio: docker, dev, build")]
-    [ValidateSet("docker", "dev", "build", "stop")]
+    [Parameter(HelpMessage="Modalità di avvio: docker, dev, localdev, build")]
+    [ValidateSet("docker", "dev", "localdev", "build", "stop")]
     [string]$Mode = "docker",
     
     [Parameter(HelpMessage="Forza ricostruzione dei container")]
@@ -107,6 +107,32 @@ function Start-DevMode {
     }
 }
 
+function Start-LocalDevMode {
+    Write-Host "💻 Avvio in modalità sviluppo locale..." -ForegroundColor Blue
+    
+    if (!(Test-DotNetInstalled)) {
+        Write-Error "❌ .NET 8.0 SDK non trovato. Installa .NET 8.0 SDK."
+        return
+    }
+
+    try {
+        Write-Host "🔧 Compilazione progetto..." -ForegroundColor Yellow
+        dotnet build
+        
+        Write-Host "🚀 Avvio applicazione..." -ForegroundColor Yellow
+        Write-Host "`n✅ Applicazione in avvio..." -ForegroundColor Green
+        Write-Host "🌐 URL Applicazione: https://localhost:5001" -ForegroundColor Cyan
+        Write-Host "📧 Email di test: test@example.com" -ForegroundColor Cyan
+        Write-Host "🔑 Password di test: password123" -ForegroundColor Cyan
+        Write-Host "`n🛑 Premi Ctrl+C per fermare l'applicazione" -ForegroundColor Yellow
+        
+        dotnet run
+    }
+    catch {
+        Write-Error "❌ Errore durante l'avvio: $($_.Exception.Message)"
+    }
+}
+
 function Start-BuildMode {
     Write-Host "🔨 Compilazione e test..." -ForegroundColor Blue
     
@@ -155,6 +181,7 @@ function Stop-Application {
 switch ($Mode) {
     "docker" { Start-DockerMode }
     "dev" { Start-DevMode }
+    "localdev" { Start-LocalDevMode }
     "build" { Start-BuildMode }
     "stop" { Stop-Application }
     default { 
