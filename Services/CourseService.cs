@@ -21,7 +21,7 @@ public class CourseService
         {
             using var connection = _dbConnectionService.CreateConnection();
             
-            // ATTENZIONE: Questo approccio è vulnerabile a SQL injection e non è sicuro per la produzione
+            //* ATTENZIONE: Questo approccio è vulnerabile a SQL injection e non è sicuro per la produzione
             var sql = $@"
                 SELECT Id, Title, StartDate, EndDate, Result, UserId 
                 FROM Courses 
@@ -35,7 +35,24 @@ public class CourseService
             sql += " ORDER BY StartDate DESC";
             
             var courses = await connection.QueryAsync<Course>(sql);
+            //*/
             
+            /* Approccio corretto: query parametrica
+            var sql = @"
+                SELECT Id, Title, StartDate, EndDate, Result, UserId 
+                FROM Courses 
+                WHERE UserId = @UserId";
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                sql += " AND Title LIKE '%@SearchTerm%'";
+            }
+
+            sql += " ORDER BY StartDate DESC";
+            
+            var courses = await connection.QueryAsync<Course>(sql, new { UserId = userId, SearchTerm = searchTerm});
+            //*/
+
             _logger.LogInformation("Retrieved {Count} courses for user {UserId}", courses.Count(), userId);
             
             return courses;

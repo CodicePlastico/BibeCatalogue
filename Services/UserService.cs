@@ -21,13 +21,24 @@ public class UserService
         {
             using var connection = _dbConnectionService.CreateConnection();
             
+            //* ATTENZIONE: Questo approccio è vulnerabile a SQL injection e non è sicuro per la produzione
+            var sql = $@"
+                SELECT Id, Email, Password, FirstName, LastName, CreatedAt 
+                FROM Users 
+                WHERE Email = '{email}' AND Password = '{password}'";
+            
+            var user = await connection.QueryFirstOrDefaultAsync<User>(sql);
+            //*/
+
+            /* Approccio corretto: query parametrica
             const string sql = @"
                 SELECT Id, Email, Password, FirstName, LastName, CreatedAt 
                 FROM Users 
                 WHERE Email = @Email AND Password = @Password";
             
             var user = await connection.QueryFirstOrDefaultAsync<User>(sql, new { Email = email, Password = password });
-            
+            */
+
             if (user != null)
             {
                 _logger.LogInformation("User {Email} authenticated successfully", email);
